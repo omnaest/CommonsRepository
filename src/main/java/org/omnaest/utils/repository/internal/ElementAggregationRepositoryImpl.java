@@ -30,7 +30,7 @@ public class ElementAggregationRepositoryImpl<I, D, M> implements ElementAggrega
         this.removedReferenceRepository = factory.newInstance("removedReferenceRepository", idType, Long.class);
         JsonStringConverter<LogEntry<D, M>> converter = JSONHelper.converter(tf -> tf.constructParametricType(LogEntry.class, dataType, metaType));
         this.logRepository = IndexElementRepository.of(factory.newInstance("logRepository", Long.class, String.class)
-                                                              .mapped(BidirectionalFunction.of(converter.deserializer(), converter.serializer())));
+                                                              .asDataMapped(BidirectionalFunction.of(converter.deserializer(), converter.serializer())));
     }
 
     @Override

@@ -220,9 +220,24 @@ public interface ElementRepository<I, D> extends CoreElementRepository<I, D>, Ap
         }
     }
 
-    public default <ND> ElementRepository<I, ND> mapped(BidirectionalFunction<D, ND> mapper)
+    public default <ND> ElementRepository<I, ND> asDataMapped(BidirectionalFunction<D, ND> mapper)
     {
-        return new MappedElementRepository<>(this, mapper);
+        return asMapped(BidirectionalFunction.identity(), mapper);
+    }
+
+    public default <NI> ElementRepository<NI, D> asKeyMapped(BidirectionalFunction<I, NI> mapper)
+    {
+        return asMapped(mapper, BidirectionalFunction.identity());
+    }
+
+    public default <NI, ND> ElementRepository<NI, ND> asMapped(BidirectionalFunction<I, NI> keyMapper, BidirectionalFunction<D, ND> dataMapper)
+    {
+        return new MappedElementRepository<>(this, keyMapper, dataMapper);
+    }
+
+    public default IndexElementRepository<D> asIndexElementRepository(BidirectionalFunction<I, Long> mapper)
+    {
+        return IndexElementRepository.of(this.asKeyMapped(mapper));
     }
 
 }

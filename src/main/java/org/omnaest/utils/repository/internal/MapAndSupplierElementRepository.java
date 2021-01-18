@@ -33,12 +33,12 @@ import org.omnaest.utils.repository.ElementRepository;
  * @param <I>
  * @param <D>
  */
-public class MapElementRepository<I, D> implements ElementRepository<I, D>
+public class MapAndSupplierElementRepository<I, D> implements ElementRepository<I, D>
 {
     private Map<I, D>   map;
     private Supplier<I> idSupplier;
 
-    public MapElementRepository(Map<I, D> map, Supplier<I> idSupplier)
+    public MapAndSupplierElementRepository(Map<I, D> map, Supplier<I> idSupplier)
     {
         super();
         this.map = map;

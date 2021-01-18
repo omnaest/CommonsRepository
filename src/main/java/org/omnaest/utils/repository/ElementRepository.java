@@ -27,9 +27,10 @@ import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
 import org.omnaest.utils.ReflectionUtils;
+import org.omnaest.utils.SupplierUtils;
 import org.omnaest.utils.functional.BidirectionalFunction;
 import org.omnaest.utils.repository.internal.AppendableSupportedCoreElementRepositoryDecorator;
-import org.omnaest.utils.repository.internal.MapElementRepository;
+import org.omnaest.utils.repository.internal.MapAndSupplierElementRepository;
 import org.omnaest.utils.repository.internal.MappedElementRepository;
 import org.omnaest.utils.repository.internal.SynchronizedElementRepository;
 import org.omnaest.utils.repository.internal.WeakHashMapDecoratingElementRepository;
@@ -52,64 +53,22 @@ import org.omnaest.utils.repository.join.ElementRepositoryJoiner;
  * @param <D>
  *            data element
  */
-public interface ElementRepository<I, D> extends CoreElementRepository<I, D>, AppendableElementRepository<I, D>
+public interface ElementRepository<I, D> extends MapElementRepository<I, D>, AppendableElementRepository<I, D>
 {
     @Override
     public ElementRepository<I, D> clear();
 
-    /**
-     * Returns the element for the given id, but if the element is not available it calls the given {@link Supplier}, returns that retrieved element and adds it
-     * to the {@link ElementRepository}
-     * 
-     * @param id
-     * @param supplier
-     * @return
-     */
-    public default D computeIfAbsent(I id, Supplier<D> supplier)
-    {
-        D element = this.getValue(id);
-        if (element == null)
-        {
-            element = supplier.get();
-            this.put(id, element);
-        }
-        return element;
-    }
-
-    /**
-     * Gets an element by the given id and allows to update it by a {@link UnaryOperator}. After the {@link UnaryOperator} finishes the element will be written
-     * back to the {@link ElementRepository}.
-     * 
-     * @param id
-     * @param updateFunction
-     * @return
-     */
+    @Override
     public default ElementRepository<I, D> update(I id, UnaryOperator<D> updateFunction)
     {
-        D element = this.getValue(id);
-        element = updateFunction.apply(element);
-        this.put(id, element);
+        MapElementRepository.super.update(id, updateFunction);
         return this;
     }
 
-    /**
-     * Gets or creates an element by the given id and supplier and allows to update it by a {@link UnaryOperator}. After the {@link UnaryOperator} finished the
-     * element will be written to the store.
-     * 
-     * @param id
-     * @param supplier
-     * @param updateFunction
-     * @return
-     */
+    @Override
     public default ElementRepository<I, D> computeIfAbsentAndUpdate(I id, Supplier<D> supplier, UnaryOperator<D> updateFunction)
     {
-        D element = this.getValue(id);
-        if (element == null)
-        {
-            element = supplier.get();
-        }
-        element = updateFunction.apply(element);
-        this.put(id, element);
+        MapElementRepository.super.computeIfAbsentAndUpdate(id, supplier, updateFunction);
         return this;
     }
 
@@ -142,17 +101,38 @@ public interface ElementRepository<I, D> extends CoreElementRepository<I, D>, Ap
      */
     public static <I, D> ElementRepository<I, D> of(Map<I, D> map, Supplier<I> idSupplier)
     {
-        return new MapElementRepository<>(map, idSupplier);
+        return new MapAndSupplierElementRepository<>(map, idSupplier);
     }
 
     /**
-     * Wraps a given {@link CoreElementRepository} with support for the {@link AppendableElementRepository} methods
+     * Returns a {@link MapElementRepository} based on a {@link Map}, which does not allow to append elements without specifying an id.
+     * 
+     * @param map
+     * @return
+     */
+    public static <I, D> MapElementRepository<I, D> ofNonSupplied(Map<I, D> map)
+    {
+        return of(map, SupplierUtils.toExceptionThrowingSupplier(() -> new UnsupportedOperationException())).asMapElementRepository();
+    }
+
+    /**
+     * Returns the current instance as {@link MapElementRepository}
+     * 
+     * @return
+     */
+    public default MapElementRepository<I, D> asMapElementRepository()
+    {
+        return this;
+    }
+
+    /**
+     * Wraps a given {@link MapElementRepository} with support for the {@link AppendableElementRepository} methods
      * 
      * @param coreElementRepository
      * @param idSupplier
      * @return
      */
-    public static <I, D> ElementRepository<I, D> from(CoreElementRepository<I, D> coreElementRepository, Supplier<I> idSupplier)
+    public static <I, D> ElementRepository<I, D> from(MapElementRepository<I, D> coreElementRepository, Supplier<I> idSupplier)
     {
         return new AppendableSupportedCoreElementRepositoryDecorator<>(coreElementRepository, idSupplier);
     }

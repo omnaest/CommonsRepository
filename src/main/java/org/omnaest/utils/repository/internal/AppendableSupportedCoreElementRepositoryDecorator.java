@@ -3,14 +3,14 @@ package org.omnaest.utils.repository.internal;
 import java.util.function.Supplier;
 
 import org.omnaest.utils.StreamUtils;
-import org.omnaest.utils.repository.CoreElementRepository;
+import org.omnaest.utils.repository.MapElementRepository;
 import org.omnaest.utils.repository.ElementRepository;
 
 public class AppendableSupportedCoreElementRepositoryDecorator<I, D> extends CoreElementRepositoryDecorator<I, D> implements ElementRepository<I, D>
 {
     private Supplier<I> idSupplier;
 
-    public AppendableSupportedCoreElementRepositoryDecorator(CoreElementRepository<I, D> elementRepository, Supplier<I> idSupplier)
+    public AppendableSupportedCoreElementRepositoryDecorator(MapElementRepository<I, D> elementRepository, Supplier<I> idSupplier)
     {
         super(elementRepository);
         this.idSupplier = idSupplier;

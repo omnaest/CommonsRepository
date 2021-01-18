@@ -10,7 +10,7 @@ import org.omnaest.utils.repository.internal.DirectoryElementRepository;
 import org.omnaest.utils.repository.internal.DispatchingIndexElementRepository;
 import org.omnaest.utils.repository.internal.ElementRepositoryToIndexElementRepositoryAdapter;
 import org.omnaest.utils.repository.internal.IndexElementRepositoryList;
-import org.omnaest.utils.repository.internal.MapElementRepository;
+import org.omnaest.utils.repository.internal.MapAndSupplierElementRepository;
 
 /**
  * {@link ElementRepository} which uses a {@link Long} value as key
@@ -43,7 +43,7 @@ public interface IndexElementRepository<D> extends ElementRepository<Long, D>
      */
     public static <D> IndexElementRepository<D> of(Map<Long, D> map)
     {
-        return IndexElementRepository.of(new MapElementRepository<>(map, new Supplier<Long>()
+        return IndexElementRepository.of(new MapAndSupplierElementRepository<>(map, new Supplier<Long>()
         {
             private AtomicLong counter = new AtomicLong();
 

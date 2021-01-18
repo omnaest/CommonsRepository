@@ -1,14 +1,17 @@
 package org.omnaest.utils.repository;
 
+import java.util.Map;
 import java.util.function.Supplier;
 
 /**
+ * {@link Map} like {@link ElementRepository}
+ * 
  * @see ElementRepository
  * @author omnaest
  * @param <I>
  * @param <D>
  */
-public interface CoreElementRepository<I, D> extends ImmutableElementRepository<I, D>, MutableElementRepository<I, D>, AutoCloseable
+public interface MapElementRepository<I, D> extends MutableElementRepository<I, D>, AutoCloseable
 {
     /**
      * Closes the underlying repository. This is an optional method.
@@ -18,6 +21,9 @@ public interface CoreElementRepository<I, D> extends ImmutableElementRepository<
     {
         //do nothing
     }
+
+    @Override
+    public MapElementRepository<I, D> clear();
 
     /**
      * Returns an {@link ElementRepository} with the given id {@link Supplier}
@@ -30,6 +36,4 @@ public interface CoreElementRepository<I, D> extends ImmutableElementRepository<
         return ElementRepository.from(this, idSupplier);
     }
 
-    @Override
-    public CoreElementRepository<I, D> clear();
 }

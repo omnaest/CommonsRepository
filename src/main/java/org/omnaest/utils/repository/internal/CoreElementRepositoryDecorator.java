@@ -9,13 +9,13 @@ import java.util.stream.Stream;
 
 import org.omnaest.utils.element.bi.BiElement;
 import org.omnaest.utils.optional.NullOptional;
-import org.omnaest.utils.repository.CoreElementRepository;
+import org.omnaest.utils.repository.MapElementRepository;
 
-public class CoreElementRepositoryDecorator<I, D> implements CoreElementRepository<I, D>
+public class CoreElementRepositoryDecorator<I, D> implements MapElementRepository<I, D>
 {
-    protected CoreElementRepository<I, D> elementRepository;
+    protected MapElementRepository<I, D> elementRepository;
 
-    public CoreElementRepositoryDecorator(CoreElementRepository<I, D> elementRepository)
+    public CoreElementRepositoryDecorator(MapElementRepository<I, D> elementRepository)
     {
         super();
         this.elementRepository = elementRepository;
@@ -52,7 +52,7 @@ public class CoreElementRepositoryDecorator<I, D> implements CoreElementReposito
     }
 
     @Override
-    public CoreElementRepository<I, D> clear()
+    public MapElementRepository<I, D> clear()
     {
         this.elementRepository.clear();
         return this;

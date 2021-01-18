@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 import org.junit.Test;
 import org.omnaest.utils.repository.ElementRepository;
 
-public class MapElementRepositoryTest
+public class MapAndSupplierElementRepositoryTest
 {
 
     @Test

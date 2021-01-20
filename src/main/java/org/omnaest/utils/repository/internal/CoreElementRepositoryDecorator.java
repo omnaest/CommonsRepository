@@ -113,9 +113,9 @@ public class CoreElementRepositoryDecorator<I, D> implements MapElementRepositor
     }
 
     @Override
-    public Map<I, D> get(Collection<I> ids)
+    public Map<I, D> getAll(Collection<I> ids)
     {
-        return this.elementRepository.get(ids);
+        return this.elementRepository.getAll(ids);
     }
 
     @Override

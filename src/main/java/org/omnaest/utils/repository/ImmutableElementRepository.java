@@ -1,5 +1,6 @@
 package org.omnaest.utils.repository;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -99,7 +100,11 @@ public interface ImmutableElementRepository<I, D> extends Iterable<BiElement<I, 
      * @see #addAll(Object)
      * @return
      */
-    public long size();
+    public default long size()
+    {
+        return this.ids()
+                   .count();
+    }
 
     /**
      * Returns true if this {@link IndexElementRepository} is empty
@@ -135,7 +140,7 @@ public interface ImmutableElementRepository<I, D> extends Iterable<BiElement<I, 
     /**
      * Gets an element by its id or returns the default element if no entry is present. This can also return null, if the stored value for an id is null.
      * 
-     * @see #get(Collection)
+     * @see #getAll(Collection)
      * @see #getValueOrDefault(Object, Object)
      * @param id
      * @param defaultElement
@@ -153,11 +158,23 @@ public interface ImmutableElementRepository<I, D> extends Iterable<BiElement<I, 
      * @param ids
      * @return
      */
-    public default Map<I, D> get(Collection<I> ids)
+    public default Map<I, D> getAll(Collection<I> ids)
     {
         return ids != null ? ids.stream()
                                 .collect(Collectors.toMap(id -> id, id -> this.getValue(id)))
                 : Collections.emptyMap();
+    }
+
+    /**
+     * Similar to {@link #getAll(Collection)}
+     * 
+     * @param ids
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public default Map<I, D> getAll(I... ids)
+    {
+        return this.getAll(Arrays.asList(ids));
     }
 
     @Override

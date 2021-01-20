@@ -161,6 +161,7 @@ public interface ImmutableElementRepository<I, D> extends Iterable<BiElement<I, 
     public default Map<I, D> getAll(Collection<I> ids)
     {
         return ids != null ? ids.stream()
+                                .filter(id -> this.containsId(id))
                                 .collect(Collectors.toMap(id -> id, id -> this.getValue(id)))
                 : Collections.emptyMap();
     }

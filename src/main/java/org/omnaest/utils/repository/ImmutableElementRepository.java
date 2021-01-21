@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -160,10 +161,11 @@ public interface ImmutableElementRepository<I, D> extends Iterable<BiElement<I, 
      */
     public default Map<I, D> getAll(Collection<I> ids)
     {
-        return ids != null ? ids.stream()
-                                .filter(id -> this.containsId(id))
-                                .collect(Collectors.toMap(id -> id, id -> this.getValue(id)))
-                : Collections.emptyMap();
+        return Optional.ofNullable(ids)
+                       .map(Collection::stream)
+                       .map(stream -> stream.filter(id -> this.containsId(id))
+                                            .collect(Collectors.toMap(id -> id, id -> this.getValue(id))))
+                       .orElse(Collections.emptyMap());
     }
 
     /**

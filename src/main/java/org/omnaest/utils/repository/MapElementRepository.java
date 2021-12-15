@@ -18,6 +18,8 @@ package org.omnaest.utils.repository;
 import java.util.Map;
 import java.util.function.Supplier;
 
+import org.omnaest.utils.repository.adapter.MapElementRepositoryToMapAdapter;
+
 /**
  * {@link Map} like {@link ElementRepository}
  * 
@@ -51,4 +53,13 @@ public interface MapElementRepository<I, D> extends MutableElementRepository<I, 
         return ElementRepository.from(this, idSupplier);
     }
 
+    /**
+     * Returns a {@link Map} view of this {@link MapElementRepository}
+     * 
+     * @return
+     */
+    public default Map<I, D> asMap()
+    {
+        return new MapElementRepositoryToMapAdapter<>(this);
+    }
 }

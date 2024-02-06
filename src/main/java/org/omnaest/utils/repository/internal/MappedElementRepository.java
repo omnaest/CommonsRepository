@@ -87,4 +87,16 @@ public class MappedElementRepository<I, OI, D, OD> implements ElementRepository<
         return this;
     }
 
+    @Override
+    public Class<I> getKeyType()
+    {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Class<D> getDataType()
+    {
+        throw new UnsupportedOperationException();
+    }
+
 }

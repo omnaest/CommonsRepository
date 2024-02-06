@@ -199,4 +199,16 @@ public class ElementAggregationRepositoryImpl<I, D, M> implements ElementAggrega
 
     }
 
+    @Override
+    public Class<I> getKeyType()
+    {
+        return this.referenceRepository.getKeyType();
+    }
+
+    @Override
+    public Class<Entry<D, M>> getDataType()
+    {
+        throw new UnsupportedOperationException();
+    }
+
 }

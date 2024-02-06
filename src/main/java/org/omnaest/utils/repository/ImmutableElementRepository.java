@@ -51,8 +51,6 @@ public interface ImmutableElementRepository<I, D> extends Iterable<BiElement<I, 
                    .orElse(null);
     }
 
-    //public Optional<D> get(I id);
-
     /**
      * Tests if the given id is present
      * 
@@ -223,4 +221,8 @@ public interface ImmutableElementRepository<I, D> extends Iterable<BiElement<I, 
         return this.stream()
                    .map(BiElement::getSecond);
     }
+
+    public Class<I> getKeyType();
+
+    public Class<D> getDataType();
 }

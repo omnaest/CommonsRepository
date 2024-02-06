@@ -81,4 +81,17 @@ public class ElementRepositoryJoinedView<I, D1, D2> implements ImmutableElementR
         return "ElementRepositoryJoiner [elementRepositoryLeft=" + this.elementRepositoryLeft + ", elementRepositoryRight=" + this.elementRepositoryRight + "]";
     }
 
+    @Override
+    public Class<I> getKeyType()
+    {
+        return this.elementRepositoryLeft.getKeyType();
+    }
+
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @Override
+    public Class<BiElement<D1, D2>> getDataType()
+    {
+        return (Class) BiElement.class;
+    }
+
 }

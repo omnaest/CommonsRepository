@@ -154,4 +154,16 @@ public class DispatchingIndexElementRepository<D> implements IndexElementReposit
                          .forEach(IndexElementRepository<D>::close);
     }
 
+    @Override
+    public Class<Long> getKeyType()
+    {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Class<D> getDataType()
+    {
+        throw new UnsupportedOperationException();
+    }
+
 }

@@ -92,4 +92,16 @@ public class ElementRepositoryToIndexElementRepositoryAdapter<D> implements Inde
         this.elementRepository.close();
     }
 
+    @Override
+    public Class<Long> getKeyType()
+    {
+        return this.elementRepository.getKeyType();
+    }
+
+    @Override
+    public Class<D> getDataType()
+    {
+        return this.elementRepository.getDataType();
+    }
+
 }

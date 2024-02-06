@@ -116,4 +116,11 @@ public interface IndexElementRepository<D> extends ElementRepository<Long, D>
     {
         return new IndexElementRepositoryList<>(this);
     }
+
+    @Override
+    public default Class<Long> getKeyType()
+    {
+        return Long.class;
+    }
+
 }

@@ -42,10 +42,14 @@ public class JsonHashFileIndexRepository<I, D> implements MapElementRepository<I
     private TextFileIndex          fileIndex;
     private JsonStringConverter<I> keyConverter;
     private JsonStringConverter<D> dataConverter;
+    private Class<I>               keyType;
+    private Class<D>               dataType;
 
     public JsonHashFileIndexRepository(File directory, int capacity, int numberOfThreads, Class<I> keyType, Class<D> dataType)
     {
         super();
+        this.keyType = keyType;
+        this.dataType = dataType;
         this.fileIndex = numberOfThreads >= 2 ? new MultithreadedHashTextFileIndex(directory, capacity, numberOfThreads)
                 : new ConcurrentHashTextFileIndex(directory, capacity);
         this.keyConverter = JSONHelper.converter(keyType);
@@ -127,6 +131,18 @@ public class JsonHashFileIndexRepository<I, D> implements MapElementRepository<I
     {
         this.fileIndex.clear();
         return this;
+    }
+
+    @Override
+    public Class<I> getKeyType()
+    {
+        return this.keyType;
+    }
+
+    @Override
+    public Class<D> getDataType()
+    {
+        return this.dataType;
     }
 
 }

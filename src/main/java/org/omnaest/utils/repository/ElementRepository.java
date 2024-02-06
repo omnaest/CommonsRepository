@@ -235,4 +235,14 @@ public interface ElementRepository<I, D> extends MapElementRepository<I, D>, App
         return IndexElementRepository.of(this.asKeyMapped(mapper));
     }
 
+    public default SetElementRepository<I> asSetElementRepository()
+    {
+        return SetElementRepository.of(this);
+    }
+
+    public default SetElementRepository<I> asSetElementRepository(D nullValue)
+    {
+        return SetElementRepository.of(this, nullValue);
+    }
+
 }

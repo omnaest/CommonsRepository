@@ -151,4 +151,16 @@ public class CoreElementRepositoryDecorator<I, D> implements MapElementRepositor
         return this.elementRepository.values();
     }
 
+    @Override
+    public Class<I> getKeyType()
+    {
+        return this.elementRepository.getKeyType();
+    }
+
+    @Override
+    public Class<D> getDataType()
+    {
+        return this.elementRepository.getDataType();
+    }
+
 }

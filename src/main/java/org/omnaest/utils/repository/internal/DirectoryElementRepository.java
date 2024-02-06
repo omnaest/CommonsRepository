@@ -212,4 +212,10 @@ public class DirectoryElementRepository<D> implements IndexElementRepository<D>
                 + this.deleteFilesOnExit + "]";
     }
 
+    @Override
+    public Class<D> getDataType()
+    {
+        return this.type;
+    }
+
 }

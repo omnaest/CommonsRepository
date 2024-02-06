@@ -115,4 +115,16 @@ public class MapAndSupplierElementRepository<I, D> implements ElementRepository<
         return "MapElementRepository [map=" + this.map + ", idSupplier=" + this.idSupplier + "]";
     }
 
+    @Override
+    public Class<I> getKeyType()
+    {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Class<D> getDataType()
+    {
+        throw new UnsupportedOperationException();
+    }
+
 }

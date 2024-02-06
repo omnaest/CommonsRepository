@@ -137,4 +137,16 @@ public abstract class ElementRepositoryDecorator<I, D> implements ElementReposit
         this.elementRepository.close();
     }
 
+    @Override
+    public Class<I> getKeyType()
+    {
+        return this.elementRepository.getKeyType();
+    }
+
+    @Override
+    public Class<D> getDataType()
+    {
+        return this.elementRepository.getDataType();
+    }
+
 }

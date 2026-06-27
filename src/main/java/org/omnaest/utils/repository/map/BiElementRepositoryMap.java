@@ -106,8 +106,7 @@ public class BiElementRepositoryMap<K, V> extends MapDecorator<K, V> implements 
 
     public <I1, I2> BiElementRepositoryMap(ElementRepository<I1, K> keyRepository, ElementRepository<I2, V> valueRepository)
     {
-        super(MapUtils.toMediatedMap(new ConcurrentHashMap<>(), new BidirectionalFunction<K, ElementSupplier<K>>()
-        {
+        super(MapUtils.toMediatedMap(new ConcurrentHashMap<>(), new BidirectionalFunction<K, ElementSupplier<K>>() {
             @Override
             public Function<K, ElementSupplier<K>> forward()
             {
@@ -120,8 +119,7 @@ public class BiElementRepositoryMap<K, V> extends MapDecorator<K, V> implements 
                 return elementSupplier -> ObjectUtils.getIfNotNull(elementSupplier, es -> es.get());
             }
 
-        }, new BidirectionalFunction<K, ElementSupplier<K>>()
-        {
+        }, new BidirectionalFunction<K, ElementSupplier<K>>() {
             @Override
             public Function<K, ElementSupplier<K>> forward()
             {
@@ -134,8 +132,7 @@ public class BiElementRepositoryMap<K, V> extends MapDecorator<K, V> implements 
                 return elementSupplier -> ObjectUtils.getIfNotNull(elementSupplier, es -> es.get());
             }
 
-        }, new BidirectionalFunction<V, ElementSupplier<V>>()
-        {
+        }, new BidirectionalFunction<V, ElementSupplier<V>>() {
             @Override
             public Function<V, ElementSupplier<V>> forward()
             {
@@ -147,8 +144,7 @@ public class BiElementRepositoryMap<K, V> extends MapDecorator<K, V> implements 
             {
                 return elementSupplier -> ObjectUtils.getIfNotNull(elementSupplier, es -> es.get());
             }
-        }, new BidirectionalFunction<V, ElementSupplier<V>>()
-        {
+        }, new BidirectionalFunction<V, ElementSupplier<V>>() {
             @Override
             public Function<V, ElementSupplier<V>> forward()
             {

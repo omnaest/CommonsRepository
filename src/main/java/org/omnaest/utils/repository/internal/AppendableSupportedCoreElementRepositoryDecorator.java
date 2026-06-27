@@ -18,8 +18,8 @@ package org.omnaest.utils.repository.internal;
 import java.util.function.Supplier;
 
 import org.omnaest.utils.StreamUtils;
-import org.omnaest.utils.repository.MapElementRepository;
 import org.omnaest.utils.repository.ElementRepository;
+import org.omnaest.utils.repository.MapElementRepository;
 
 public class AppendableSupportedCoreElementRepositoryDecorator<I, D> extends CoreElementRepositoryDecorator<I, D> implements ElementRepository<I, D>
 {

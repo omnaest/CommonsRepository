@@ -39,8 +39,7 @@ public class ElementRepositoryUtils
         return ElementRepository.of(new ConcurrentHashMap<>());
     }
 
-    public static <I, D> MapElementRepository<I, D> newJsonHashFileIndexRepository(File directory, int capacity, int numberOfThreads, Class<I> keyType,
-                                                                                   Class<D> dataType)
+    public static <I, D> MapElementRepository<I, D> newJsonHashFileIndexRepository(File directory, int capacity, int numberOfThreads, Class<I> keyType, Class<D> dataType)
     {
         return new JsonHashFileIndexRepository<>(directory, capacity, numberOfThreads, keyType, dataType);
     }

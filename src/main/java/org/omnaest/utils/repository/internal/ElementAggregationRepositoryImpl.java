@@ -129,13 +129,13 @@ public class ElementAggregationRepositoryImpl<I, D, M> implements ElementAggrega
     protected static class LogEntry<D, M> implements LoggedEntry<D, M>
     {
         @JsonProperty
-        private Long previousReferenceId;
+        private Long  previousReferenceId;
 
         @JsonProperty
-        private D data;
+        private D     data;
 
         @JsonProperty
-        private M meta;
+        private M     meta;
 
         @JsonProperty
         private State state;

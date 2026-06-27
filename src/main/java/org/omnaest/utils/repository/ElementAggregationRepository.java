@@ -54,8 +54,7 @@ public interface ElementAggregationRepository<I, D, M> extends ElementRepository
 
         public static <D, M> Entry<D, M> of(D data, M meta)
         {
-            return new Entry<D, M>()
-            {
+            return new Entry<D, M>() {
                 @Override
                 public D get()
                 {

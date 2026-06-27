@@ -28,8 +28,7 @@ public class DirectoryElementRepositoryTest
     @Test
     public void testDetermineFile() throws Exception
     {
-        DirectoryElementRepository<String> repository = new DirectoryElementRepository<String>(new File("C:/Temp"), String.class)
-        {
+        DirectoryElementRepository<String> repository = new DirectoryElementRepository<String>(new File("C:/Temp"), String.class) {
 
             @Override
             public File determineFile(long fileIndex)

@@ -32,22 +32,21 @@ import org.slf4j.LoggerFactory;
 
 public class BufferedUpdateElementAggregationRepository<I, D> extends ElementAggregationRepositoryDecorator<I, D>
 {
-    private static final Logger LOG = LoggerFactory.getLogger(BufferedUpdateElementAggregationRepository.class);
+    private static final Logger    LOG           = LoggerFactory.getLogger(BufferedUpdateElementAggregationRepository.class);
 
-    private Queue<BiElement<I, D>> cache = new ConcurrentLinkedQueue<>();
+    private Queue<BiElement<I, D>> cache         = new ConcurrentLinkedQueue<>();
     private ExecutorService        executorService;
 
-    private int      delay         = 5;
-    private TimeUnit delayTimeUnit = TimeUnit.SECONDS;
-    private int      maxCacheSize  = 100;
+    private int                    delay         = 5;
+    private TimeUnit               delayTimeUnit = TimeUnit.SECONDS;
+    private int                    maxCacheSize  = 100;
 
     public BufferedUpdateElementAggregationRepository(ElementAggregationRepositoryV1<I, D> repository)
     {
         super(repository);
 
         this.executorService = Executors.newSingleThreadExecutor();
-        this.executorService.submit(new Runnable()
-        {
+        this.executorService.submit(new Runnable() {
             @Override
             public void run()
             {

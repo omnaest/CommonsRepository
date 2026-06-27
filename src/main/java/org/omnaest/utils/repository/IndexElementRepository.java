@@ -58,8 +58,7 @@ public interface IndexElementRepository<D> extends ElementRepository<Long, D>
      */
     public static <D> IndexElementRepository<D> of(Map<Long, D> map)
     {
-        return IndexElementRepository.of(new MapAndSupplierElementRepository<>(map, new Supplier<Long>()
-        {
+        return IndexElementRepository.of(new MapAndSupplierElementRepository<>(map, new Supplier<Long>() {
             private AtomicLong counter = new AtomicLong();
 
             @Override

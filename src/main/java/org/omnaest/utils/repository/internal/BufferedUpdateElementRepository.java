@@ -28,20 +28,19 @@ import org.omnaest.utils.repository.ElementRepository;
 
 public class BufferedUpdateElementRepository<I, D> extends ElementRepositoryDecorator<I, D>
 {
-    private Map<I, D>       cache = new ConcurrentHashMap<>();
+    private Map<I, D>       cache         = new ConcurrentHashMap<>();
     private ExecutorService executorService;
 
-    private int      delay         = 1;
-    private TimeUnit delayTimeUnit = TimeUnit.SECONDS;
-    private int      maxCacheSize  = 100;
+    private int             delay         = 1;
+    private TimeUnit        delayTimeUnit = TimeUnit.SECONDS;
+    private int             maxCacheSize  = 100;
 
     public BufferedUpdateElementRepository(ElementRepository<I, D> elementRepository)
     {
         super(elementRepository);
 
         this.executorService = Executors.newSingleThreadExecutor();
-        this.executorService.submit(new Runnable()
-        {
+        this.executorService.submit(new Runnable() {
             @Override
             public void run()
             {

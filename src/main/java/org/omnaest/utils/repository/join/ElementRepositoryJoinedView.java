@@ -32,8 +32,7 @@ public class ElementRepositoryJoinedView<I, D1, D2> implements ImmutableElementR
     private ElementRepository<I, D2>      elementRepositoryRight;
     private Predicate<LeftAndRight<I, I>> mergedIdFilter;
 
-    public ElementRepositoryJoinedView(ElementRepository<I, D1> elementRepositoryLeft, ElementRepository<I, D2> elementRepositoryRight,
-                                       Predicate<LeftAndRight<I, I>> mergedIdFilter)
+    public ElementRepositoryJoinedView(ElementRepository<I, D1> elementRepositoryLeft, ElementRepository<I, D2> elementRepositoryRight, Predicate<LeftAndRight<I, I>> mergedIdFilter)
     {
         super();
         this.elementRepositoryLeft = elementRepositoryLeft;
@@ -87,7 +86,7 @@ public class ElementRepositoryJoinedView<I, D1, D2> implements ImmutableElementR
         return this.elementRepositoryLeft.getKeyType();
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
     public Class<BiElement<D1, D2>> getDataType()
     {

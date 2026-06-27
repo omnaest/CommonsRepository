@@ -209,7 +209,7 @@ public class DirectoryElementRepository<D> implements IndexElementRepository<D>
     public String toString()
     {
         return "DirectoryElementRepository [counter=" + this.counter + ", directory=" + this.directory + ", type=" + this.type + ", deleteFilesOnExit="
-                + this.deleteFilesOnExit + "]";
+               + this.deleteFilesOnExit + "]";
     }
 
     @Override

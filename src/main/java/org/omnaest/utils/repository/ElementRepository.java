@@ -203,8 +203,7 @@ public interface ElementRepository<I, D> extends MapElementRepository<I, D>, App
 
         public static Factory of(Map<?, ?> map)
         {
-            return new ElementRepository.Factory()
-            {
+            return new ElementRepository.Factory() {
                 @Override
                 public <I, D> ElementRepository<I, D> newInstance(String name, Class<I> idType, Class<D> dataType)
                 {

@@ -29,8 +29,7 @@ public interface ElementRepositoryJoiner<I, DL, DR>
 
     public ImmutableElementRepository<I, BiElement<DL, DR>> outer();
 
-    public static <I, DL, DR> ElementRepositoryJoiner<I, DL, DR> of(ElementRepository<I, DL> elementRepositoryLeft,
-                                                                    ElementRepository<I, DR> elementRepositoryRight)
+    public static <I, DL, DR> ElementRepositoryJoiner<I, DL, DR> of(ElementRepository<I, DL> elementRepositoryLeft, ElementRepository<I, DR> elementRepositoryRight)
     {
         return new ElementRepositoryJoinerImpl<>(elementRepositoryLeft, elementRepositoryRight);
     }
